@@ -10,4 +10,10 @@ public class CenterOfMass : MonoBehaviour
         r = GetComponent<Rigidbody2D>();
         r.centerOfMass = setCenterOfMass;
     }
+
+    void FixedUpdate()
+    {
+	transform.rotation = Quaternion.LookRotation(Vector3.forward, r.linearVelocity);
+	transform.Rotate(0, 0, 90);
+    }
 }
