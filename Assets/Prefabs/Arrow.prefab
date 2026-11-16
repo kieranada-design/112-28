@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 4937368971125846442}
   - component: {fileID: 1519534168279873838}
   - component: {fileID: 1800686820638490891}
+  - component: {fileID: -5811280360357208842}
   m_Layer: 0
   m_Name: Arrow
   m_TagString: Arrow
@@ -181,3 +182,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CenterOfMass
   setCenterOfMass: {x: 0.15, y: 0}
+--- !u!114 &-5811280360357208842
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3074196059368567184}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5e6172cab26bd3448119543d082cd28, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerCombat
+  enemy: {fileID: 893381143450280825, guid: 297317b9197c82e4499f15989a540860, type: 3}
