@@ -3,8 +3,9 @@ using UnityEngine;
 public class EnemyDirection : MonoBehaviour
 {
   public GameObject player;
+  public GameObject enemyOb;
    
-    public Enemy enemy;
+
     private void Update()
     {
         Vector3 scale = transform.localScale;
@@ -13,15 +14,15 @@ public class EnemyDirection : MonoBehaviour
         if (player.transform.position.x > transform.position.x)
         {
             scale.x = Mathf.Abs(scale.x) * -1;
-            enemy.EnemyLogic();
+            
             
         }
         else
         {
-            scale.x = Mathf.Abs(scale.x);
-            enemy.EnemyLogic();
+             scale.x = Mathf.Abs(scale.x);
+            
         }
-        transform.localScale = scale;
+        enemyOb.transform.localScale = scale;
         
     }
 }

@@ -9,6 +9,8 @@ public class Enemy : MonoBehaviour
     public float moveSpeed;
     public float timer;
 
+    
+
     private RaycastHit2D hit;
     private GameObject target;
     private Animator anim;
@@ -18,19 +20,19 @@ public class Enemy : MonoBehaviour
     private bool cooling;
     private float intTimer;
 
-
     void Awake()
     {
         intTimer = timer;
         anim = GetComponent<Animator>();
     }
+
     void Update()
     {
         if (inRange)
         {
-            hit = Physics2D.Raycast(rayCast.position, Vector2.left, rayCastLength, raycastMask);
-
-            RayCastDebugger();
+            Vector2 direction = (target.transform.position - rayCast.position).normalized;
+            hit = Physics2D.Raycast(rayCast.position, direction, rayCastLength, raycastMask);
+            RayCastDebugger(direction);
         }
 
         if (hit.collider != null)
@@ -56,12 +58,16 @@ public class Enemy : MonoBehaviour
             target = trig.gameObject;
             inRange = true;
         }
+        else
+        {
+            inRange = false;
+        }
     }
-
 
     public void EnemyLogic()
     {
         distance = Vector2.Distance(transform.position, target.transform.position);
+
         if (distance > attackDistance)
         {
             Move();
@@ -71,12 +77,12 @@ public class Enemy : MonoBehaviour
         {
             Attack();
         }
+
         if (cooling)
         {
             anim.SetBool("Attack", false);
             CoolDown();
         }
-
     }
 
     void Move()
@@ -89,10 +95,12 @@ public class Enemy : MonoBehaviour
             transform.position = Vector2.MoveTowards(transform.position, targetPosition, moveSpeed * Time.deltaTime);
         }
     }
+
     void Attack()
     {
         timer = intTimer;
         attackMode = true;
+
         anim.SetBool("canWalk", false);
         anim.SetBool("Attack", true);
     }
@@ -100,41 +108,35 @@ public class Enemy : MonoBehaviour
     void CoolDown()
     {
         timer -= Time.deltaTime;
+
         if (timer <= 0 && cooling && attackMode)
         {
             cooling = false;
             timer = intTimer;
         }
-       
     }
-
 
     void StopAttack()
     {
         cooling = false;
         attackMode = false;
         anim.SetBool("Attack", false);
-        
     }
 
-    void RayCastDebugger()
+    void RayCastDebugger(Vector2 direction)
     {
         if (distance > attackDistance)
         {
-            Debug.DrawRay(rayCast.position, Vector2.left * rayCastLength, Color.red);
+            Debug.DrawRay(rayCast.position, direction * rayCastLength, Color.red);
         }
-        else if (attackDistance > distance)
+        else
         {
-            Debug.DrawRay(rayCast.position, Vector2.left * rayCastLength, Color.green);
-
+            Debug.DrawRay(rayCast.position, direction * rayCastLength, Color.green);
         }
-       
     }
 
     public void Cooling()
     {
         cooling = true;
-        
-
     }
 }

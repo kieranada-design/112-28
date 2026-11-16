@@ -1,4 +1,5 @@
 using UnityEngine;
+
 public class EnemyCombat : MonoBehaviour
 {
     
@@ -9,7 +10,5 @@ public class EnemyCombat : MonoBehaviour
         {
             SceneControl.instance.Restart();
         }
-       
     }
-
 }
