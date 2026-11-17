@@ -11,4 +11,4 @@ public class EnemyCombat : MonoBehaviour
             SceneControl.instance.Restart();
         }
     }
-}
+} //This calls a restart of the current scene if the player gets hit with this collider that is attached to the enemies weapon and moves with the enemies animation
